@@ -1,0 +1,95 @@
+@import './colors.scss';
+@import './viewport';
+
+@mixin text-heading-styles {
+    margin: 0;
+    font-family: $font-family;
+    font-weight: normal;
+    line-height: 116%;
+    font-weight: 400;
+}
+
+@mixin text-heading-1 {
+    @include text-heading-styles;
+    line-height: 100%;
+
+    @include viewport-desktop {
+        font-size: px-to-rem(70);
+    }
+    @include viewport-tablet {
+        font-size: px-to-rem(70);
+    }
+    @include viewport-phone {
+        font-size: px-to-rem(70);
+    }
+}
+
+@mixin text-heading-2 {
+    @include text-heading-styles;
+
+    @include viewport-desktop {
+        font-size: px-to-rem(56);
+    }
+    @include viewport-tablet {
+        font-size: px-to-rem(56);
+    }
+    @include viewport-phone {
+        font-size: px-to-rem(56);
+    }
+}
+
+@mixin text-heading-3 {
+    @include text-heading-styles;
+
+    @include viewport-desktop {
+        font-size: px-to-rem(24);
+    }
+    @include viewport-tablet {
+        font-size: px-to-rem(22);
+    }
+    @include viewport-phone {
+        font-size: px-to-rem(20);
+    }
+}
+
+@mixin text-heading-4 {
+    @include text-heading-styles;
+
+    @include viewport-desktop {
+        font-size: px-to-rem(16);
+    }
+    @include viewport-tablet {
+        font-size: px-to-rem(16);
+    }
+    @include viewport-phone {
+        font-size: px-to-rem(16);
+    }
+}
+
+@mixin text-heading-5 {
+    @include text-heading-styles;
+
+    @include viewport-desktop {
+        font-size: px-to-rem(14);
+    }
+    @include viewport-tablet {
+        font-size: px-to-rem(14);
+    }
+    @include viewport-phone {
+        font-size: px-to-rem(14);
+    }
+}
+
+@mixin text-heading-6 {
+    @include text-heading-styles;
+
+    @include viewport-desktop {
+        font-size: px-to-rem(12);
+    }
+    @include viewport-tablet {
+        font-size: px-to-rem(12);
+    }
+    @include viewport-phone {
+        font-size: px-to-rem(12);
+    }
+}

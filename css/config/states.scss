@@ -1,0 +1,25 @@
+@import './device.scss';
+
+@mixin hover() {
+  &:hover {
+    @content;
+  }
+}
+
+@mixin non-mobile-hover ($useGlobal: false) {
+  @include non-mobile-device ($useGlobal) {
+    @include hover {
+      @content;
+    }
+  }
+}
+
+@mixin hover-focus-visible {
+  &:hover {
+    @content;
+  }
+
+  &:focus-visible {
+    @content;
+  }
+}
