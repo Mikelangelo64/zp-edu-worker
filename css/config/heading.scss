@@ -14,13 +14,21 @@
     line-height: 100%;
 
     @include viewport-desktop {
-        font-size: px-to-rem(70);
+        font-size: px-to-rem(64);
+        
+        @media (min-width: 1800px) {
+            font-size: px-to-rem(70);
+        }
     }
     @include viewport-tablet {
-        font-size: px-to-rem(70);
+        font-size: px-to-rem(52);
     }
     @include viewport-phone {
-        font-size: px-to-rem(70);
+        font-size: px-to-rem(32);
+
+        @media (max-width: 410px) {
+            font-size: px-to-rem(28);
+        }
     }
 }
 
@@ -31,10 +39,11 @@
         font-size: px-to-rem(56);
     }
     @include viewport-tablet {
-        font-size: px-to-rem(56);
+        font-size: px-to-rem(48);
     }
     @include viewport-phone {
-        font-size: px-to-rem(56);
+        font-size: px-to-rem(30);
+
     }
 }
 

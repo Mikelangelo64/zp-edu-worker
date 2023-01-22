@@ -317,3 +317,12 @@ body {
         margin-top: px-to-rem(60);
     }
 }
+
+@keyframes loop {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
