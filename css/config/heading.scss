@@ -51,7 +51,11 @@
     @include text-heading-styles;
 
     @include viewport-desktop {
-        font-size: px-to-rem(24);
+        font-size: px-to-rem(22);
+
+        @media (min-width: 1540px) {
+            font-size: px-to-rem(24);
+        }
     }
     @include viewport-tablet {
         font-size: px-to-rem(22);

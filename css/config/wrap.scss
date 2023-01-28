@@ -11,10 +11,13 @@
       --wrap: 2.604vw;
       --wrap-1: 18.489vw;
       --wrap-2: 22.708vw;
+      // --wrap-colored: calc(18.489vw - 2.604vw);
+      --wrap-colored: calc(var(--wrap-1) - var(--wrap));
   
       @media (min-width: 1920px) {
         --wrap: calc((100vw - 1820px) / 2);
         --wrap-1: calc((100vw - 1110px) / 2);
+        --wrap-colored: #{px-to-rem(355)};
         --wrap-2: calc((100vw - 1080px) / 2);
       }
     }
@@ -22,10 +25,13 @@
       --wrap: 5vw;
       --wrap-1: 5vw;
       --wrap-2: 5vw;
+      --wrap-colored: 5vw;
+      //--wrap-colored: 19.505vw;
     }
     @include viewport-phone {
       --wrap: 5vw;
       --wrap-1: 5vw;
       --wrap-2: 5vw;
+      --wrap-colored: 5vw;
     }
 }

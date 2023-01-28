@@ -377,207 +377,26 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // if (document.body.clientWidth > 550) {
-  //   makeClone(departmentListContent, departmentList);
-  //   initMoveMarquee(departmentList);
-  // }
+  //swipers
+  const swiperNews = new Swiper('.news-slider.swiper', {
+    navigation: {
+      nextEl: '.news__buttons__slider__container .news-slider-next',
+      prevEl: '.news__buttons__slider__container .news-slider-prev',
+    },
 
-  //globalTimeline.pause();
+    slidesPerView: 1,
+    spaceBetween: 30,
 
-  // departmentList.addEventListener('mouseenter', () => {
-  //   globalTimeline.pause();
-  // });
-
-  // departmentList.addEventListener('mouseleave', () => {
-  //   globalTimeline.play();
-  // });
-
-  //makeMoreClone
-  // function makeMoreClone(itemWidth, windowWidth) {
-  //   if (itemWidth / windowWidth >= 1) {
-  //     return;
-  //   }
-
-  //   if (itemWidth / windowWidth < 1) {
-  //     cloneCount++;
-  //     makeMoreClone(itemWidth * 2, windowWidth);
-  //   }
-  // }
-
-  // //create timeline
-  // const makeTimelineScroll = (item, shift) => {
-  //   const timeline = gsap.timeline({ repeat: -1 });
-
-  //   timeline.to(item, {
-  //     duration: 10,
-  //     x: `${shift * 100 + 100}%`,
-  //     ease: 'none',
-  //     // modifiers: {
-  //     //   x: gsap.utils.unitize((x) => parseFloat(x) % (shift * 100 )), //force x value to be between 0 and 500 using modulus
-  //     // },
-  //   });
-
-  //   return timeline;
-  // };
-
-  // //add clone in html
-  // const addClone = (item) => {
-  //   const itemWidth = item.getBoundingClientRect().width;
-  //   const windowWidth = document.body.clientWidth;
-
-  //   //const innerContent = item.querySelector('.department-list__inner');
-  //   const innerContent = item.innerHTML;
-
-  //   if (!innerContent) {
-  //     return;
-  //   }
-
-  //   makeMoreClone(itemWidth, windowWidth);
-
-  //   for (let i = 0; i < cloneCount; i++) {
-  //     item.insertAdjacentHTML('beforeend', innerContent);
-  //   }
-  // };
-
-  // //initialize scroll for one line
-  // const initScroll = (item) => {
-  //   addClone(item);
-  //   const inners = item.querySelectorAll('.department-list__inner');
-
-  //   if (inners.length === 0) {
-  //     return;
-  //   }
-
-  //   inners.forEach((inner, index) => {
-  //     const innerLeft = inner.getBoundingClientRect().left;
-  //     const innerWidth = inner.getBoundingClientRect().width;
-  //     const windowWidth = document.body.clientWidth;
-
-  //     const shift = innerWidth / windowWidth;
-
-  //     console.log(shift);
-
-  //     globalTimeline.add(makeTimelineScroll(inner, shift), '0s');
-  //   });
-  //   // const itemWidth = item.getBoundingClientRect().width;
-  //   // const windowWidth = document.body.clientWidth;
-
-  //   // const shift = windowWidth / (itemWidth * (cloneCount + 1));
-
-  //   // console.log(shift);
-
-  //   // makeTimelineScroll(item, shift);
-  // };
-
-  //departmentList && initScroll(departmentList);
-
-  // let loop = horizontalLoop(departmentList, {
-  //   speed: 1,
-  //   repeat: -1,
-  //   paddingRight: 25,
-  // });
-
-  // function horizontalLoop(items, config) {
-  //   items = gsap.utils.toArray(items);
-  //   config = config || {};
-  //   let tl = gsap.timeline({
-  //       repeat: config.repeat,
-  //       paused: config.paused,
-  //       defaults: { ease: 'none' },
-  //       onReverseComplete: () =>
-  //         tl.totalTime(tl.rawTime() + tl.duration() * 100),
-  //     }),
-  //     length = items.length,
-  //     startX = items[0].offsetLeft,
-  //     times = [],
-  //     widths = [],
-  //     xPercents = [],
-  //     curIndex = 0,
-  //     pixelsPerSecond = (config.speed || 1) * 100,
-  //     snap =
-  //       config.snap === false ? (v) => v : gsap.utils.snap(config.snap || 1), // some browsers shift by a pixel to accommodate flex layouts, so for example if width is 20% the first element's width might be 242px, and the next 243px, alternating back and forth. So we snap to 5 percentage points to make things look more natural
-  //     totalWidth,
-  //     curX,
-  //     distanceToStart,
-  //     distanceToLoop,
-  //     item,
-  //     i;
-  //   gsap.set(items, {
-  //     // convert "x" to "xPercent" to make things responsive, and populate the widths/xPercents Arrays to make lookups faster.
-  //     xPercent: (i, el) => {
-  //       let w = (widths[i] = parseFloat(gsap.getProperty(el, 'width', 'px')));
-  //       xPercents[i] = snap(
-  //         (parseFloat(gsap.getProperty(el, 'x', 'px')) / w) * 100 +
-  //           gsap.getProperty(el, 'xPercent')
-  //       );
-  //       return xPercents[i];
-  //     },
-  //   });
-  //   gsap.set(items, { x: 0 });
-  //   totalWidth =
-  //     items[length - 1].offsetLeft +
-  //     (xPercents[length - 1] / 100) * widths[length - 1] -
-  //     startX +
-  //     items[length - 1].offsetWidth *
-  //       gsap.getProperty(items[length - 1], 'scaleX') +
-  //     (parseFloat(config.paddingRight) || 0);
-  //   for (i = 0; i < length; i++) {
-  //     item = items[i];
-  //     curX = (xPercents[i] / 100) * widths[i];
-  //     distanceToStart = item.offsetLeft + curX - startX;
-  //     distanceToLoop =
-  //       distanceToStart + widths[i] * gsap.getProperty(item, 'scaleX');
-  //     tl.to(
-  //       item,
-  //       {
-  //         xPercent: snap(((curX - distanceToLoop) / widths[i]) * 100),
-  //         duration: distanceToLoop / pixelsPerSecond,
-  //       },
-  //       0
-  //     )
-  //       .fromTo(
-  //         item,
-  //         {
-  //           xPercent: snap(
-  //             ((curX - distanceToLoop + totalWidth) / widths[i]) * 100
-  //           ),
-  //         },
-  //         {
-  //           xPercent: xPercents[i],
-  //           duration:
-  //             (curX - distanceToLoop + totalWidth - curX) / pixelsPerSecond,
-  //           immediateRender: false,
-  //         },
-  //         distanceToLoop / pixelsPerSecond
-  //       )
-  //       .add('label' + i, distanceToStart / pixelsPerSecond);
-  //     times[i] = distanceToStart / pixelsPerSecond;
-  //   }
-  //   function toIndex(index, vars) {
-  //     vars = vars || {};
-  //     Math.abs(index - curIndex) > length / 2 &&
-  //       (index += index > curIndex ? -length : length); // always go in the shortest direction
-  //     let newIndex = gsap.utils.wrap(0, length, index),
-  //       time = times[newIndex];
-  //     if (time > tl.time() !== index > curIndex) {
-  //       // if we're wrapping the timeline's playhead, make the proper adjustments
-  //       vars.modifiers = { time: gsap.utils.wrap(0, tl.duration()) };
-  //       time += tl.duration() * (index > curIndex ? 1 : -1);
-  //     }
-  //     curIndex = newIndex;
-  //     vars.overwrite = true;
-  //     return tl.tweenTo(time, vars);
-  //   }
-  //   tl.next = (vars) => toIndex(curIndex + 1, vars);
-  //   tl.previous = (vars) => toIndex(curIndex - 1, vars);
-  //   tl.current = () => curIndex;
-  //   tl.toIndex = (index, vars) => toIndex(index, vars);
-  //   tl.times = times;
-  //   tl.progress(1, true).progress(0, true); // pre-render for performance
-  //   if (config.reversed) {
-  //     tl.vars.onReverseComplete();
-  //     tl.reverse();
-  //   }
-  //   return tl;
-  // }
+    breakpoints: {
+      550: {
+        slidesPerView: 2,
+      },
+      899: {
+        slidesPerView: 3,
+      },
+      1199: {
+        slidesPerView: 3,
+      },
+    },
+  });
 });
