@@ -3,6 +3,8 @@
   --color-black: #000000;
   --color-white--rgb: 255, 255, 255;
   --color-white: #FFFFFF;
+  --color-grey-050--rgb: 217, 217, 217;
+  --color-grey-050: #D9D9D9;
   --color-grey-100--rgb: 164, 172, 193;
   --color-grey-100: #A4ACC1;
   --color-grey-200--rgb: 171, 171, 171;
@@ -66,6 +68,8 @@ html {
   --color-black: #000000;
   --color-white--rgb: 255, 255, 255;
   --color-white: #FFFFFF;
+  --color-grey-050--rgb: 217, 217, 217;
+  --color-grey-050: #D9D9D9;
   --color-grey-100--rgb: 164, 172, 193;
   --color-grey-100: #A4ACC1;
   --color-grey-200--rgb: 171, 171, 171;
@@ -2011,8 +2015,28 @@ html:not(.v-mobile) .categories-list__item:hover .categories-list__hover .catego
   }
 }
 
+.news.news-events .news__container {
+  padding: 0 var(--wrap);
+}
+@media (max-width: 899px) {
+  .news.news-events .news__container {
+    padding: 0;
+  }
+}
+
+@media (min-width: 900px) {
+  .news.news-events .news__wrapper {
+    padding: 4.75rem var(--wrap-colored) 0;
+  }
+}
+@media (max-width: 899px) {
+  .news.news-events .news__wrapper {
+    padding: 1.5rem var(--wrap-colored) 0;
+  }
+}
+
 .news[data-with-separate] .news__wrapper {
-  background-color: var(--color-green);
+  background-color: var(--color-green-100);
   -webkit-transition: background 0.3s ease;
   transition: background 0.3s ease;
 }
@@ -2570,6 +2594,48 @@ html:not(.v-mobile) .swiper-pagination-horizontal.swiper-pagination-bullets .sep
   }
 }
 @media (min-width: 900px) {
+  .news-feed > *:first-child {
+    width: 40.09%;
+    -ms-flex-negative: 0;
+        flex-shrink: 0;
+  }
+}
+@media (min-width: 900px) {
+  .news.news-events .news-feed > *:first-child {
+    width: 48.6486%;
+    -ms-flex-negative: 0;
+        flex-shrink: 0;
+  }
+}
+
+@media (min-width: 900px) {
+  .news-feed > *:last-child {
+    width: 48.6486%;
+    -ms-flex-negative: 0;
+        flex-shrink: 0;
+  }
+}
+@media (min-width: 900px) {
+  .news.news-events .news-feed > *:last-child {
+    width: 40.09%;
+    -ms-flex-negative: 0;
+        flex-shrink: 0;
+  }
+}
+
+.news.news-events .news-feed {
+  color: var(--color-black);
+}
+@media (min-width: 900px) {
+  .news.news-events .news-feed {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: row-reverse;
+            flex-direction: row-reverse;
+  }
+}
+
+@media (min-width: 900px) {
   .news-feed > * + * {
     margin-left: 3.125rem;
   }
@@ -2580,15 +2646,24 @@ html:not(.v-mobile) .swiper-pagination-horizontal.swiper-pagination-bullets .sep
   }
 }
 @media (min-width: 900px) {
-  .news-feed__list {
-    width: 48.6486%;
-    -ms-flex-negative: 0;
-        flex-shrink: 0;
+  .news.news-events .news-feed > * + * {
+    margin-left: unset;
+    margin-right: 3.125rem;
   }
 }
+@media (max-width: 899px) {
+  .news.news-events .news-feed > * + * {
+    margin-top: 1.25em;
+  }
+}
+
 .news-feed__list > * + * {
   margin-top: 2.25em;
 }
+.news.news-events .news-feed__list > * + * {
+  margin-top: 1.25em;
+}
+
 .news-feed__item {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2606,9 +2681,18 @@ html:not(.v-mobile) .swiper-pagination-horizontal.swiper-pagination-bullets .sep
 .news-feed__item > * + * {
   margin-top: 1.25em;
 }
+.news.news-events .news-feed__item {
+  border-color: var(--color-grey-050);
+  padding-top: 0.937em;
+}
+
 .news-feed__big .news-feed__item {
   border-top: unset;
   padding-top: unset;
+}
+
+.news.news-events .news-feed__big .news-feed__item {
+  padding-top: 0;
 }
 
 .news-feed__img {
@@ -2665,6 +2749,14 @@ html:not(.v-mobile) .news-feed__item:hover .news-feed__title {
   color: var(--color-highlight);
 }
 
+.news.news-events .news-feed__item:focus-visible .news-feed__title {
+  color: var(--color-blue-100);
+}
+
+html:not(.v-mobile) .news.news-events .news-feed__item:hover .news-feed__title {
+  color: var(--color-blue-100);
+}
+
 .news-feed__info {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2684,4 +2776,7 @@ html:not(.v-mobile) .news-feed__item:hover .news-feed__title {
 }
 .news-feed__description {
   opacity: 0.5;
+}
+.news.news-events .news-feed__description {
+  margin-top: 0.625em;
 }

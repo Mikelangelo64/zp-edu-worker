@@ -408,8 +408,6 @@ document.addEventListener('DOMContentLoaded', function () {
   );
   const separateSlidersArray = [];
 
-  console.log(separateContainers);
-
   if (separateSections.length !== 0 && separateContainers.length !== 0) {
     //initialize sliders
     separateSections.forEach((separate) => {
