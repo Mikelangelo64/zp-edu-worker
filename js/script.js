@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
   header &&
     window.addEventListener('scroll', () => {
       if (window.scrollY > 100 && isFatHeader) {
-        console.log(1);
+        //console.log(1);
         header.classList.add('_scrolled');
         isFatHeader = false;
         return;
@@ -248,7 +248,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const contentWidth = content.getBoundingClientRect().width;
     const windowWidth = document.body.clientWidth;
 
-    console.log(contentWidth, windowWidth);
+    //console.log(contentWidth, windowWidth);
     return contentWidth / windowWidth < 1;
   };
 
@@ -399,4 +399,76 @@ document.addEventListener('DOMContentLoaded', function () {
       },
     },
   });
+
+  const separateSections = document.querySelectorAll(
+    '[data-with-separate] .separate'
+  );
+  const separateContainers = document.querySelectorAll(
+    '[data-with-separate] [data-active-slide]'
+  );
+  const separateSlidersArray = [];
+
+  console.log(separateContainers);
+
+  if (separateSections.length !== 0 && separateContainers.length !== 0) {
+    //initialize sliders
+    separateSections.forEach((separate) => {
+      const slider = separate.querySelector(
+        '.separate .separate-slider.swiper'
+      );
+      if (!slider) {
+        return;
+      }
+
+      const paginationContainer = separate.querySelector(
+        '.separate-header .separate-header__wrapper'
+      );
+      if (!paginationContainer) {
+        return;
+      }
+
+      const bulletContentArray =
+        paginationContainer.querySelectorAll('.separate-bullet');
+      if (bulletContentArray.length === 0) {
+        return;
+      }
+
+      const swiperInit = new Swiper(slider, {
+        effect: 'fade',
+        autoHeight: true,
+        allowTouchMove: false,
+        pagination: {
+          el: paginationContainer,
+          clickable: true,
+          renderBullet: function (index, className) {
+            return `
+                <button class="${className} separate-bullet">
+                  <span>
+                    ${
+                      bulletContentArray[index]
+                        ? bulletContentArray[index].innerHTML
+                        : 'Рубрика'
+                    }
+                  </span>
+                </button>
+              `;
+          },
+        },
+
+        slidesPerView: 1,
+        spaceBetween: 30,
+      });
+
+      separateSlidersArray.push(swiperInit);
+    });
+
+    //change bg of wrappers
+    separateSlidersArray.forEach((slider, index) => {
+      slider.on('slideChange', function () {
+        const activeSlideCount = this.activeIndex;
+        separateContainers[index].dataset.activeSlide =
+          activeSlideCount % 2 === 0 ? 'even' : 'odd';
+      });
+    });
+  }
 });
