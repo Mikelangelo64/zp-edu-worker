@@ -377,6 +377,135 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  //footer accordion
+  let isMobileTraform = true;
+  const accordionBtns = document.querySelectorAll('.footer-navigation__title');
+  const accordionSVG = document.querySelectorAll(
+    '.footer-navigation__arrow svg path'
+  );
+  const accordionDetails = document.querySelectorAll(
+    '.footer-navigation__inner'
+  );
+  const animations = [];
+  const animationsSVG = [];
+
+  const makeAccordionTimeline = (item) => {
+    const timeline = gsap.timeline({
+      defaults: { duration: 0.6, ease: 'power4.inOut' },
+    });
+    timeline.to(item, { height: 'auto' }).to(item, { opacity: 1 }, '<0.3');
+
+    return timeline;
+  };
+
+  const makeAccordionTimelineSVG = (item) => {
+    const timeline = gsap.timeline({
+      defaults: { duration: 0.15 },
+    });
+    timeline
+      .to(item, { d: 'path("M8 1.5 L8 8.5 L8 1.5")' })
+      .to(item, { d: 'path("M15 8 L8 1.5 L1 8")' }, '>0.15');
+
+    return timeline;
+  };
+
+  if (Array.from(accordionSVG).length !== 0) {
+    Array.from(accordionSVG).forEach((item) => {
+      const itemAnimation = makeAccordionTimelineSVG(item);
+      itemAnimation.pause();
+      animationsSVG.push(itemAnimation);
+    });
+  }
+  if (Array.from(accordionDetails).length !== 0) {
+    Array.from(accordionDetails).forEach((item) => {
+      const itemAnimation = makeAccordionTimeline(item);
+      itemAnimation.pause();
+      animations.push(itemAnimation);
+    });
+  }
+
+  const accordionBtnHandler = (evt, item, index, animations, animationsSVG) => {
+    evt.preventDefault();
+    const parent = item.parentElement;
+    if (!parent) {
+      return;
+    }
+
+    if (Array.from(parent.classList).includes('_active', 0)) {
+      if (isSafari()) {
+        const svg = item.querySelector('.footer-navigation__arrow svg');
+        if (svg) {
+          svg.classList.remove('_active');
+        }
+      } else {
+        animationsSVG[index].reverse();
+      }
+      animations[index].reverse();
+    } else {
+      if (isSafari()) {
+        const svg = item.querySelector('.footer-navigation__arrow svg');
+        if (svg) {
+          svg.classList.add('_active');
+        }
+      } else {
+        animationsSVG[index].play();
+      }
+      animations[index].play();
+    }
+    parent.classList.toggle('_active');
+  };
+
+  accordionBtns.forEach((item, index) => {
+    item.addEventListener('click', (evt) => {
+      if (document.body.clientWidth < 900) {
+        accordionBtnHandler(evt, item, index, animations, animationsSVG);
+        isMobileTraform = true;
+      }
+    });
+  });
+
+  //resize list default
+  window.addEventListener('resize', () => {
+    if (
+      document.body.clientWidth >= 900 &&
+      accordionDetails.length !== 0 &&
+      accordionSVG.length !== 0 &&
+      isMobileTraform
+    ) {
+      accordionDetails.forEach((item, index) => {
+        if (!item.parentElement.classList.contains('_active')) {
+          item.style = '';
+        } else {
+          animations[index].progress(1);
+        }
+      });
+
+      accordionSVG.forEach((item, index) => {
+        if (!item.parentElement.classList.contains('_active')) {
+          item.style = '';
+        } else {
+          animationsSVG[index].progress(1);
+        }
+      });
+      isMobileTraform = false;
+      return;
+    }
+    if (
+      document.body.clientWidth < 900 &&
+      !isMobileTraform &&
+      accordionDetails.length !== 0 &&
+      accordionSVG.length !== 0
+    ) {
+      accordionDetails.forEach((item, index) => {
+        if (item.parentElement.classList.contains('_active')) {
+          animations[index].progress(0);
+          animationsSVG[index].progress(0);
+        }
+      });
+      isMobileTraform = true;
+    }
+  });
+
   //swipers
   const swiperNews = new Swiper('.news-slider.swiper', {
     navigation: {
@@ -411,9 +540,7 @@ document.addEventListener('DOMContentLoaded', function () {
   if (separateSections.length !== 0 && separateContainers.length !== 0) {
     //initialize sliders
     separateSections.forEach((separate) => {
-      const slider = separate.querySelector(
-        '.separate .separate-slider.swiper'
-      );
+      const slider = separate.querySelector('.separate-slider.swiper');
       if (!slider) {
         return;
       }
@@ -434,20 +561,18 @@ document.addEventListener('DOMContentLoaded', function () {
       const swiperInit = new Swiper(slider, {
         effect: 'fade',
         autoHeight: true,
-        allowTouchMove: false,
+        allowTouchMove: true,
         pagination: {
           el: paginationContainer,
           clickable: true,
           renderBullet: function (index, className) {
             return `
                 <button class="${className} separate-bullet">
-                  <span>
                     ${
                       bulletContentArray[index]
                         ? bulletContentArray[index].innerHTML
                         : 'Рубрика'
                     }
-                  </span>
                 </button>
               `;
           },
