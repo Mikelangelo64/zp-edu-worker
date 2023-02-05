@@ -1469,14 +1469,27 @@ section {
         &__item {
             position: relative;
             display: block;
+            height: var(--categories-height);
             border-top: 1px solid var(--color-white);
             padding: 0 0.166em;
+
             overflow: hidden;
+            transition: background 0.3s ease, color 0.3s ease, border 0.3s ease;
 
             font-weight: 400;
             font-size: 1em;
             line-height: 166%;
             color: var(--color-white);
+
+            @include non-mobile-hover {
+                color: var(--color-blue-200);
+                background-color: var(--color-white);
+            }
+
+            &:focus-visible {
+                color: var(--color-blue-200);
+                background-color: var(--color-white);
+            }
         }
         
         //.categories-list__hover 
@@ -1580,7 +1593,7 @@ section {
         }
 
         @at-root .news[data-with-separate] & {
-            background-color: var(--color-green-100);
+            background-color: var(--color-blue-200);
             transition: background 0.3s ease;
     
             @include viewport-tablet-min {
@@ -1593,11 +1606,11 @@ section {
         }
 
         @at-root .news[data-with-separate] &[data-active-slide = even] {
-            background-color: var(--color-green-100);
-        }
-
-        @at-root .news[data-with-separate] &[data-active-slide = odd] {
             background-color: var(--color-blue-200);
+        }
+        
+        @at-root .news[data-with-separate] &[data-active-slide = odd] {
+            background-color: var(--color-green-100);
         }
     }
     
@@ -1625,11 +1638,11 @@ section {
     //.news__main 
     &__main {
         @include viewport-tablet-min {
-            margin-top: px-to-rem(42);
+            margin-top: px-to-rem(32);
         }
 
         @include viewport-phone {
-            margin-top: px-to-rem(36);
+            margin-top: px-to-rem(28);
         }
 
         @at-root .news.news-categories & {
@@ -1639,12 +1652,13 @@ section {
     
     //.news__footer 
     &__footer {
+        margin-top: px-to-rem(36);
         @include viewport-tablet-min {
-            margin-top: px-to-rem(68);
+            //margin-top: px-to-rem(68);
         }
 
         @include viewport-phone {
-            margin-top: px-to-rem(42);
+            //margin-top: px-to-rem(42);
         }
     }
 
@@ -1962,15 +1976,15 @@ section {
             }
     
             @include viewport-desktop {
-                font-size: px-to-rem(28);
+                font-size: px-to-rem(24);
                 
                 @media (min-width: 1600px) {
-                    font-size: px-to-rem(34);
+                    font-size: px-to-rem(28);
                 }
             }
     
             @include viewport-tablet {
-                font-size: px-to-rem(26);
+                font-size: px-to-rem(22);
             }
     
             @include viewport-phone {
@@ -2015,7 +2029,7 @@ section {
         pointer-events: all;
 
         @include viewport-tablet-min {
-            padding-bottom: px-to-rem(13) !important;
+            padding-bottom: px-to-rem(10) !important;
         }
 
         @include viewport-phone {
@@ -2119,16 +2133,17 @@ section {
 
     & > *:first-child {
         @include viewport-tablet-min {
-            width: 40.09%;
+            //width: 40.09%;
+            width: 36%;
             flex-shrink: 0;
         }
 
-        @at-root .news.news-events .news-feed > *:first-child {
-            @include viewport-tablet-min {
-                width: 48.6486%;
-                flex-shrink: 0;
-            }
-        }
+        // @at-root .news.news-events .news-feed > *:first-child {
+        //     @include viewport-tablet-min {
+        //         width: 48.6486%;
+        //         flex-shrink: 0;
+        //     }
+        // }
     }
 
     & > *:last-child {
@@ -2137,12 +2152,12 @@ section {
             flex-shrink: 0;
         }
 
-        @at-root .news.news-events .news-feed > *:last-child {
-            @include viewport-tablet-min {
-                width: 40.09%;
-                flex-shrink: 0;
-            }
-        }
+        // @at-root .news.news-events .news-feed > *:last-child {
+        //     @include viewport-tablet-min {
+        //         width: 40.09%;
+        //         flex-shrink: 0;
+        //     }
+        // }
     }
 
     @at-root .news.news-events & {
@@ -2182,7 +2197,8 @@ section {
     //.news-feed__list 
     &__list {
         > * + * {
-            margin-top: 2.25em;
+            //margin-top: 2.25em;
+            margin-top: 1.25em;
 
             @at-root .news.news-events .news-feed__list > * + * {
                 margin-top: 1.25em;
@@ -2202,12 +2218,14 @@ section {
         color: inherit;
 
         > * + * {
-            margin-top: 1.25em;
+            //margin-top: 1.25em;
+            margin-top: 0.8em;
         }
 
         @at-root .news.news-events & {
             border-color: var(--color-grey-050);
-            padding-top: 0.937em;
+            //padding-top: 0.937em;
+            padding-top: 0.8em;
         }
 
 
@@ -2225,7 +2243,14 @@ section {
     //.news-feed__img 
     &__img {
         position: relative;
-        width: 100%;
+
+        @include viewport-tablet-min {
+            width: 80%;
+        }
+
+        @include viewport-phone {
+            width: 100%;
+        }
 
         //.news-feed__img__container 
         &__container {
@@ -2429,14 +2454,16 @@ section {
             margin-right: auto;
             grid-template-columns: repeat(2, 1fr);
             gap: px-to-rem(16);
-
+            
             @media (max-width: 550px) {
                 max-width: unset;
             }
         }
-
+        
         //.instagram-list__item 
         &__item {
+            position: relative;
+            z-index: 0;
             display: block;
             width: 100%;
         }
@@ -2444,6 +2471,7 @@ section {
         //.instagram-list__img 
         &__img {
             position: relative;
+            z-index: 0;
             display: block;
             width: 100%;
             overflow: hidden;
@@ -2464,15 +2492,98 @@ section {
                 object-fit: cover;
                 transition: transform 0.3s ease;
 
-                @at-root .instagram-list__item:hover img {
+                @at-root .instagram-list__item:hover .instagram-list__img img {
                     @include non-mobile-device {
                         transform: scale(1.1);
                     }
                 }
 
-                @at-root .instagram-list__item:focus-visible img {
+                @at-root .instagram-list__item:focus-visible .instagram-list__img img {
                     transform: scale(1.1);
                 }
+            }
+        }
+
+    }
+    
+    //.instagram-hover 
+    &-hover {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        display: flex;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(var(--color-black--rgb), 0.8);
+
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        opacity: 0;
+        transition: opacity 0.3s ease;
+
+        text-align: center;
+        line-height: 100%;
+        color: var(--color-white);
+        
+        @include viewport-desktop {
+            font-size: px-to-rem(18);
+        }
+        
+        @include viewport-tablet {
+            font-size: px-to-rem(16);
+        }
+        
+        @include viewport-phone {
+            font-size: px-to-rem(14);
+        }
+
+        > * + * {
+            margin-top: 0.8em;
+        }
+
+        @at-root .instagram-list__item:hover & {
+            @include non-mobile-device {
+                opacity: 1;
+            }
+        }
+
+        @at-root .instagram-list__item:focus-visible & {
+            opacity: 1;
+        }
+
+        //.instagram-hover__label 
+        &__label {
+            width: px-to-rem(40);
+
+            img,
+            svg {
+                width: 100%;
+                height: auto;
+            }
+        }
+        
+        //.instagram-hover__text 
+        &__text {
+            display: flex;
+            align-items: center;
+            color: inherit;
+        }
+        
+        //.instagram-hover__arrow 
+        &__arrow {
+            display: flex;
+            width: 1.5em;
+            margin-left: 0.5em;
+            align-items: center;
+            justify-content: center;
+
+            img,
+            svg {
+                width: 100%;
+                height: auto;
             }
         }
     }

@@ -45,6 +45,41 @@ document.addEventListener('DOMContentLoaded', function () {
   const vh = window.innerHeight * 0.01;
   document.body.style.setProperty('--vh', `${vh}px`);
 
+  //categories height
+  let categoriesHeight = 'auto';
+  const categoriesItems = document.querySelectorAll(
+    '.categories-list .categories-list__item'
+  );
+  const findTheHigherCategory = (categoriesItems, categoriesHeight) => {
+    document.body.style.setProperty('--categories-height', 'auto');
+
+    if (categoriesItems.length === 0) {
+      return;
+    }
+
+    let biggestHeight = 0;
+
+    categoriesItems.forEach((item) => {
+      const height = item.getBoundingClientRect().height;
+      biggestHeight = biggestHeight < height ? height : biggestHeight;
+    });
+
+    categoriesHeight = biggestHeight;
+    document.body.style.setProperty(
+      '--categories-height',
+      `${categoriesHeight}px`
+    );
+  };
+  findTheHigherCategory(categoriesItems, categoriesHeight);
+
+  let prevWindow = document.body.clientWidth;
+  window.addEventListener('resize', () => {
+    if (prevWindow !== document.body.clientWidth) {
+      prevWindow = document.body.clientWidth;
+      findTheHigherCategory(categoriesItems, categoriesHeight);
+    }
+  });
+
   //change header when scroll
   const header = document.querySelector('.header');
   let isFatHeader = true;
