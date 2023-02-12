@@ -169,6 +169,12 @@ body {
     margin: 0;
 }
 
+._inner__container {
+    width: 100%;
+    padding: 0 var(--wrap-1);
+    margin: 0;
+}
+
 // ._container {
 //     width: 100%;
 //     margin: 0 auto;
@@ -316,6 +322,10 @@ body {
     @include viewport-phone {
         margin-top: px-to-rem(60);
     }
+}
+
+._inner {
+    padding-top: px-to-rem(30);
 }
 
 @keyframes loop {

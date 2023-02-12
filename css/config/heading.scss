@@ -47,6 +47,18 @@
     }
 }
 
+@mixin text-heading-2-inner {
+    @include text-heading-styles;
+    
+    @include viewport-tablet-min {
+        font-size: px-to-rem(48);
+    }
+    @include viewport-phone {
+        font-size: px-to-rem(30);
+
+    }
+}
+
 @mixin text-heading-3 {
     @include text-heading-styles;
 
