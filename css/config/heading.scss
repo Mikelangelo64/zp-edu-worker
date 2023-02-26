@@ -81,7 +81,7 @@
     @include text-heading-styles;
 
     @include viewport-desktop {
-        font-size: px-to-rem(16);
+        font-size: px-to-rem(18);
     }
     @include viewport-tablet {
         font-size: px-to-rem(16);
